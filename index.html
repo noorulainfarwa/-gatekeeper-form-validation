@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gatekeeper — Secure Access Form</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <main class="page">
+    <!-- ===================== FORM CARD ===================== -->
+    <section class="card" id="formCard" aria-labelledby="formTitle">
+      <header class="card-header">
+        <p class="eyebrow">GATEKEEPER // ACCESS REQUEST</p>
+        <h1 class="title" id="formTitle">Create your account</h1>
+        <p class="subtitle">Every field below is checked before access is granted.</p>
+      </header>
+
+      <!-- Input → Process → Output pipeline indicator -->
+      <div class="pipeline" id="pipeline" aria-hidden="true">
+        <div class="stage" data-stage="input">
+          <span class="dot"></span>
+          <span class="stage-label">Input</span>
+        </div>
+        <div class="track"></div>
+        <div class="stage" data-stage="process">
+          <span class="dot"></span>
+          <span class="stage-label">Process</span>
+        </div>
+        <div class="track"></div>
+        <div class="stage" data-stage="output">
+          <span class="dot"></span>
+          <span class="stage-label">Output</span>
+        </div>
+      </div>
+
+      <!-- Screen-reader only form-level status -->
+      <p id="formStatus" class="sr-only" aria-live="polite"></p>
+
+      <form id="signupForm" novalidate>
+        <!-- Full name -->
+        <div class="field" data-field="fullName">
+          <label for="fullName">Full name</label>
+          <input
+            type="text"
+            id="fullName"
+            name="fullName"
+            autocomplete="name"
+            aria-describedby="fullName-status"
+            aria-invalid="false"
+          />
+          <p class="status" id="fullName-status" aria-live="polite">Letters and spaces only.</p>
+        </div>
+
+        <!-- Email -->
+        <div class="field" data-field="email">
+          <label for="email">Email address</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            autocomplete="email"
+            aria-describedby="email-status"
+            aria-invalid="false"
+          />
+          <p class="status" id="email-status" aria-live="polite">We'll send your confirmation here.</p>
+        </div>
+
+        <!-- Password -->
+        <div class="field" data-field="password">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            autocomplete="new-password"
+            aria-describedby="password-status"
+            aria-invalid="false"
+          />
+          <ul class="checklist" id="passwordChecklist" aria-hidden="true">
+            <li data-rule="length">8+ characters</li>
+            <li data-rule="upper">Uppercase letter</li>
+            <li data-rule="lower">Lowercase letter</li>
+            <li data-rule="digit">Number</li>
+            <li data-rule="symbol">Symbol</li>
+          </ul>
+          <p class="status" id="password-status" aria-live="polite"></p>
+        </div>
+
+        <!-- Confirm password -->
+        <div class="field" data-field="confirmPassword">
+          <label for="confirmPassword">Confirm password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            autocomplete="new-password"
+            aria-describedby="confirmPassword-status"
+            aria-invalid="false"
+          />
+          <p class="status" id="confirmPassword-status" aria-live="polite">Re-enter the password above.</p>
+        </div>
+
+        <!-- Terms checkbox -->
+        <div class="field field-checkbox" data-field="terms">
+          <div class="checkbox-row">
+            <input
+              type="checkbox"
+              id="terms"
+              name="terms"
+              aria-describedby="terms-status"
+              aria-invalid="false"
+            />
+            <label for="terms">I agree to the Terms and Privacy Policy.</label>
+          </div>
+          <p class="status" id="terms-status" aria-live="polite"></p>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+          <span class="btn-label">Request access</span>
+        </button>
+      </form>
+    </section>
+
+    <!-- ===================== SUCCESS CARD ===================== -->
+    <section class="card success-card" id="successCard" hidden aria-labelledby="successTitle">
+      <div class="success-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="32" height="32" fill="none">
+          <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h1 class="title" id="successTitle">Access granted</h1>
+      <p class="subtitle">Your details passed every check. Here's the payload sent to the backend:</p>
+
+      <pre class="json-preview"><code id="jsonOutput"></code></pre>
+
+      <button type="button" class="submit-btn ghost" id="resetBtn">Submit another request</button>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
