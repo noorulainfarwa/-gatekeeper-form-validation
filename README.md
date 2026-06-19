@@ -1,6 +1,6 @@
 # Gatekeeper — Secure Access Form
 
-DecodeLabs Frontend Internship · Project 4: Form Design & Validation
+---
 
 A sign-up form that validates every field in the browser before "submitting" — no backend, no libraries, just semantic HTML, vanilla JS, and regex.
 
